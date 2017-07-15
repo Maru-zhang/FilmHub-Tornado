@@ -1,0 +1,4 @@
+{
+    "python.linting.pylintEnabled": false,
+    "python.pythonPath": "/Users/maru/.pyenv/versions/3.6.1"
+}

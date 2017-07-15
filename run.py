@@ -3,9 +3,10 @@ import tornado.httpserver
 import tornado.ioloop
 import tornado.web
 from tornado.options import define, options
-from route import urlpatterns
+from core.url import urlpatterns
 
-define('port', default=8000, help='run on the given port', type=int)
+
+define('port', default=80, help='run on the given port', type=int)
 
 class Application(tornado.web.Application):
     
@@ -15,11 +16,11 @@ class Application(tornado.web.Application):
             static_path=os.path.join(os.path.dirname(__file__), "core/static"),
             debug=True,
             login_url='/login',
-            cookie_secret='MuG7xxacQdGPR7Svny1OfY6AymHPb0H/t02+I8rIHHE=',
+            # cookie_secret='MuG7xxacQdGPR7Svny1OfY6AymHPb0H/t02+I8rIHHE=',
         )
         super(Application, self).__init__(urlpatterns, **settings)
 
-def main(): 
+def main():
     tornado.options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(Application())
     http_server.listen(options.port)
