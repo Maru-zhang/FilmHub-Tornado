@@ -78,7 +78,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
 
     def check_signature(self, signature, timestamp, nonce):
         """校验token是否正确"""
-        token = 'test12345'
+        token = 'zhangbinhui'
         L = [timestamp, nonce, token]
         L.sort()
         s = L[0] + L[1] + L[2]
