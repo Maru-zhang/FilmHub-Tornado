@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# from core.logger_helper import logger
+from core.logger_helper import logger
 import hashlib
 import tornado.web
 
@@ -21,11 +21,14 @@ class WxSignatureHandler(tornado.web.RequestHandler):
             nonce = self.get_argument('nonce')
             echostr = self.get_argument('echostr')
             result = self.check_signature(signature, timestamp, nonce)
+            logger.debug('微信sign校验,signature='+signature+',&timestamp='+timestamp+'&nonce='+nonce+'&echostr='+echostr)
             if result:
+                logger.debug('微信sign校验,返回echostr='+echostr)
                 self.write(echostr)
-            else: pass
+            else:
+                logger.error('微信sign校验,---校验失败')
         except Exception as e:
-            pass
+            logger.error('微信sign校验,---Exception' + str(e))
 
     def post(self):
         body = self.request.body
@@ -80,5 +83,5 @@ class WxSignatureHandler(tornado.web.RequestHandler):
         L.sort()
         s = L[0] + L[1] + L[2]
         sha1 = hashlib.sha1(s.encode('utf-8')).hexdigest()
-        # logger.debug('sha1=' + sha1 + '&signature=' + signature)
+        logger.debug('sha1=' + sha1 + '&signature=' + signature)
         return sha1 == signature
