@@ -4,6 +4,7 @@ import hashlib
 import tornado.web
 from core.server.wxconfig import WxConfig
 import xml.etree.ElementTree as ET
+from PIL import Image,ImageDraw,ImageFont
 import time
 
 class WxAuthorServer(object):
@@ -63,6 +64,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
 
     check_signature: 校验signature是否正确
     """
+    pattern = re.compile(ur'^\d{16}$')
 
     def data_received(self, chunk):
         pass
@@ -96,6 +98,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 MsgId = data.find("MsgId").text
                 if MsgType == 'text':
                     Content = data.find('Content').text  # 文本消息内容
+                    reply_content = pattern.search(Content)
                 elif MsgType == 'voice':
                     Content = data.find('Recognition').text  # 语音识别结果，UTF8编码
                 if Content == u'你好':
@@ -138,3 +141,6 @@ class WxSignatureHandler(tornado.web.RequestHandler):
         sha1 = hashlib.sha1(s.encode('utf-8')).hexdigest()
         logger.debug('sha1=' + sha1 + '&signature=' + signature)
         return sha1 == signature
+
+    def check_contain_order_id(self, content):
+        
