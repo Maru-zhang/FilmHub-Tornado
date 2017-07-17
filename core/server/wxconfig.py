@@ -5,12 +5,15 @@ class WxConfig(object):
     """
     AppID = 'wxa78dfd0e461d4211'  # AppID(应用ID)
     AppSecret = '594e2e6f4de7fd19bd9ca1030aee5f10'  # AppSecret(应用密钥)
+    WdAppID = '683523' # 微店应用ID
+    WdAppSecret = '083a282e921b0f9775d5e0222d3fc3e7' # 微店应用秘钥
     """微信网页开发域名"""
     AppHost = 'http://maru-zhang.cn'
 
-    '''获取access_token'''
+    '''获取微信access_token'''
     config_get_access_token_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s' % (AppID, AppSecret)
-
+    '''获取微店access_token'''
+    config_wd_get_access_token_url = 'https://oauth.open.weidian.com/token?grant_type=client_credential&appkey=%s&secret=%s' % (WdAppID, WdAppSecret)
     '''自定义菜单创建接口'''
     menu_create_url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='
 

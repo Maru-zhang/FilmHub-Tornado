@@ -5,7 +5,6 @@ import json
 from core.server.wxconfig import WxConfig
 from core.cache.tokencache import TokenCache
 
-
 class WxSchedule(object):
     """
     定时任务调度器
@@ -21,8 +20,9 @@ class WxSchedule(object):
         """执行定时器任务"""
         logger.info('【获取微信全局唯一票据access_token】>>>执行定时器任务')
         tornado.ioloop.IOLoop.instance().call_later(0, self.get_access_token)
+        tornado.ioloop.IOLoop.instance().call_later(0, self.get_wd_access_token)
         tornado.ioloop.PeriodicCallback(self.get_access_token, self._expire_time_access_token).start()
-        # tornado.ioloop.IOLoop.current().start()
+        tornado.ioloop.PeriodicCallback(self.get_wd_access_token, self._expire_time_access_token).start()
 
     def get_access_token(self):
         """获取微信全局唯一票据access_token"""
@@ -48,6 +48,25 @@ class WxSchedule(object):
         else:
             logger.error('【获取微信全局唯一票据access_token】request access_token error, will retry get_access_token() method after 10s')
             tornado.ioloop.IOLoop.instance().call_later(10, self.get_access_token)
+    
+    def get_wd_access_token(self):
+        """获取微店全局唯一票据access_token"""
+        url = WxConfig.config_wd_get_access_token_url
+        r = requests.get(url)
+        logger.info('【获取微店全局唯一票据access_token】Response[' + str(r.status_code) + ']')
+        if r.status_code == 200:
+            res = r.text
+            logger.info('【获取微店全局唯一票据access_token】>>>' + res)
+            d = json.loads(res)
+            if d['status']['status_code'] == 0:
+                access_token = d['result']['access_token']
+                self._token_cache.set_access_cache(self._token_cache.KEY_WD_ACCESS_TOKEN, access_token)
+                return access_token
+            else:
+                errorcode = d['status']['status_code']
+                logger.info(
+                    '【获取微店全局唯一票据access_token-SDK】errcode[' + errcode + '] , will retry get_access_token() method after 10s')
+                tornado.ioloop.IOLoop.instance().call_later(10, self.get_wd_access_token)
 
     def get_jsapi_ticket(self):
         """获取JS_SDK权限签名的jsapi_ticket"""
