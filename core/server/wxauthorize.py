@@ -3,6 +3,8 @@ from core.logger_helper import logger
 import hashlib
 import tornado.web
 from core.server.wxconfig import WxConfig
+import xml.etree.ElementTree as ET
+import time
 
 class WxAuthorServer(object):
     """
@@ -105,8 +107,8 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                     CreateTime = int(time.time())
                     out = self.reply_text(FromUserName, ToUserName, CreateTime, reply_content)
                     self.write(out)
-            except:
-                pass
+            except Exception as e:
+                logger.error(str(e))
 
         elif MsgType == 'event':
             '''接收事件推送'''
@@ -119,7 +121,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                     out = self.reply_text(FromUserName, ToUserName, CreateTime, reply_content)
                     self.write(out)
             except:
-                pass
+                logger.error('错误')
 
     def reply_text(self, FromUserName, ToUserName, CreateTime, Content):
         """回复文本消息模板"""
