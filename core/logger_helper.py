@@ -1,10 +1,12 @@
 import logging
+import os
 from logging import Logger
 from logging.handlers import TimedRotatingFileHandler
 
+logger_path = os.getcwd()
+
+
 '''日志管理类'''
-
-
 def init_logger(logger_name):
 
     if logger_name not in Logger.manager.loggerDict:
@@ -16,17 +18,18 @@ def init_logger(logger_name):
         formatter = logging.Formatter(format_str, df)
         # handler all
         try:
-            handler1 = TimedRotatingFileHandler('/root/FilmHub-Tornado/core/log/all.log', when='D', interval=1, backupCount=7)
+            handler1 = TimedRotatingFileHandler(logger_path + '/core/log/all.log', when='D', interval=1, backupCount=7)
         except Exception:
-            handler1 = TimedRotatingFileHandler('/root/FilmHub-Tornado/core/log/all.log', when='D', interval=1, backupCount=7)
+            handler1 = TimedRotatingFileHandler(logger_path + '/core/log/all.log', when='D', interval=1, backupCount=7)
         handler1.setFormatter(formatter)
         handler1.setLevel(logging.DEBUG)
         logger1.addHandler(handler1)
         # handler error
         try:
-            handler2 = TimedRotatingFileHandler('/core/log/error.log', when='D', interval=1, backupCount=7)
+            handler2 = TimedRotatingFileHandler(logger_path + '/core/log/error.log', when='D', interval=1, backupCount=7)
+
         except Exception:
-            handler2 = TimedRotatingFileHandler('./core/log/error.log', when='D', interval=1, backupCount=7)
+            handler2 = TimedRotatingFileHandler(logger_path + '/core/log/error.log', when='D', interval=1, backupCount=7)
         handler2.setFormatter(formatter)
         handler2.setLevel(logging.ERROR)
         logger1.addHandler(handler2)
