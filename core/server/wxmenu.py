@@ -85,6 +85,7 @@ class WxMenuServer(object):
         return MENU_DATA
 
 if __name__ == '__main__':
+    print("hahaha")
     wx_menu_server = WxMenuServer()
     '''创建菜单数据'''
     wx_menu_server.create_menu_data()

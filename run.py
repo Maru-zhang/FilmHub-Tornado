@@ -5,6 +5,7 @@ import tornado.web
 from tornado.options import define, options
 from core.url import urlpatterns
 from core.server.wxschedule import WxSchedule
+from core.server.wxmenu import WxMenuServer
 
 define('port', default=80, help='run on the given port', type=int)
 
@@ -28,6 +29,8 @@ def main():
     wx_schedule = WxSchedule()
     wx_schedule.excute()
     tornado.ioloop.IOLoop.current().start()
+    # 创建菜单
+    menu = WxMenuServer()
 
 if __name__ == '__main__':
     main()
