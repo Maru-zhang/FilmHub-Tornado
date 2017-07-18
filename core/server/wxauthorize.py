@@ -152,7 +152,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
         return out
 
     def reply_image(self, FromUserName, ToUserName, CreateTime, Media_ID):
-        textTpl = """<xml><ToUserName><![CDATA[$s]]></ToUserName><FromUserName><![CDATA[$s]]></FromUserName><CreateTime>$s</CreateTime><MsgType><![CDATA[image]]></MsgType><Image><MediaId><![CDATA[$s]]></MediaId></Image></xml>"""
+        textTpl = """<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[image]]></MsgType><Image><MediaId><![CDATA[%s]]></MediaId></Image></xml>"""
         out = textTpl % (FromUserName, ToUserName, CreateTime, Media_ID)
         return out
 
@@ -170,7 +170,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
         CreateTime = int(time.time())
         if response.error:
             content = "对不起，输入的订单编号有误"
-            out = self.reply_text(self._fddrom_name,self._to_name,CreateTime,content)
+            out = self.reply_image(self._fddrom_name,self._to_name,CreateTime, content)
             self.write(out)
             self.finish()
         else:
@@ -186,12 +186,16 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 self.finish()
             else:
                 path = os.getcwd()
-                token = self._token_cache.get_cache(self._token_cache.KEY_WD_ACCESS_TOKEN)
+                token = self._token_cache.get_cache(self._token_cache.KEY_ACCESS_TOKEN)
                 playload_image = {'access_token': token,'type': 'image'}
-                data = {'media', open(path + "/core/static/demo.jpeg", 'rb')}
+                logger.info("access_token is", token)
+                data = {'media': open(path + "/core/static/demo.jpeg", 'rb')}
                 r = requests.post(url='http://file.api.weixin.qq.com/cgi-bin/media/upload',params=playload_image,files=data)
+                image_json = json.loads(r.text)
+                media_id = image_json["media_id"]
+                print(media_id)
+                out = self.reply_image(self._from_name, self._to_name, CreateTime, media_id)
+                #out = self.reply_text(self._from_name,self._to_name,CreateTime,content)
+                self.write(out)
                 logger.info(r.text)
-        CreateTime = int(time.time())
-        out = self.reply_text(self._from_name,self._to_name,CreateTime,content)
-        self.write(out)
         self.finish()
