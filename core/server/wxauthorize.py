@@ -2,11 +2,16 @@
 from core.logger_helper import logger
 import hashlib
 import tornado.web
+import tornado.httpclient
 from core.server.wxconfig import WxConfig
 import xml.etree.ElementTree as ET
 from PIL import Image,ImageDraw,ImageFont
 import time
-
+import re
+from core.cache.tokencache import TokenCache
+import json
+from tornado.httputil import url_concat
+import requests
 class WxAuthorServer(object):
     """
     微信网页授权server
@@ -34,7 +39,6 @@ class WxAuthorServer(object):
 
     """拉取用户信息"""
     get_userinfo_url = 'https://api.weixin.qq.com/sns/userinfo?'
-
 
     def get_code_url(self, state):
         """获取code的url"""
@@ -64,7 +68,9 @@ class WxSignatureHandler(tornado.web.RequestHandler):
 
     check_signature: 校验signature是否正确
     """
-    pattern = re.compile(ur'^\d{16}$')
+    sys_order_reply = "欢迎你关注娱乐圈"
+    pattern = re.compile(r'^\d{15}$')
+    _token_cache = TokenCache()
 
     def data_received(self, chunk):
         pass
@@ -84,13 +90,16 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 logger.error('微信sign校验,---校验失败')
         except Exception as e:
             logger.error('微信sign校验,---Exception' + str(e))
-
+   
+    @tornado.web.asynchronous
     def post(self):
         body = self.request.body
         logger.debug('微信消息回复中心】收到用户消息' + str(body.decode('utf-8')))
         data = ET.fromstring(body)
         ToUserName = data.find('ToUserName').text
         FromUserName = data.find('FromUserName').text
+        self._from_name = FromUserName
+        self._to_name = ToUserName
         MsgType = data.find('MsgType').text
         if MsgType == 'text' or MsgType == 'voice':
             '''文本消息 or 语音消息'''
@@ -98,19 +107,24 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 MsgId = data.find("MsgId").text
                 if MsgType == 'text':
                     Content = data.find('Content').text  # 文本消息内容
-                    reply_content = pattern.search(Content)
-                elif MsgType == 'voice':
-                    Content = data.find('Recognition').text  # 语音识别结果，UTF8编码
-                if Content == u'你好':
-                    reply_content = '您好,请问有什么可以帮助您的吗?'
-                else:
-                    # 查找不到关键字,默认回复
-                    reply_content = "客服小儿智商不够用啦~"
-                if reply_content:
-                    CreateTime = int(time.time())
-                    out = self.reply_text(FromUserName, ToUserName, CreateTime, reply_content)
-                    self.write(out)
+                    results = self.pattern.findall(Content)
+                    if len(results) > 0:
+                        # 找到了符合订单ID的内容
+                        order_id = results[0]
+                        http_client = tornado.httpclient.AsyncHTTPClient()
+                        token = self._token_cache.get_cache(self._token_cache.KEY_WD_ACCESS_TOKEN)
+                        params = {"order_id": order_id}
+                        public = {"access_token": token,"version": "1.0","format": "json","method": "vdian.order.get"}
+                        url = r'https://api.vdian.com/api?param={"order_id":"%s"}&public={"method":"vdian.order.get","access_token":"%s","version":"1.0","format":"json"}' % (order_id,token)
+                        http_client.fetch(url, callback=self.on_response)
+                    else:
+                        reply_content = "对不起，你可以再说一遍么?"
+                        CreateTime = int(time.time())
+                        out = self.reply_text(FromUserName, ToUserName, CreateTime, reply_content)
+                        self.write(out)
+                        self.finish()
             except Exception as e:
+                self.finish()
                 logger.error(str(e))
 
         elif MsgType == 'event':
@@ -123,7 +137,9 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                     reply_content = self.sys_order_reply
                     out = self.reply_text(FromUserName, ToUserName, CreateTime, reply_content)
                     self.write(out)
+                    self.finish()
             except:
+                self.finish()
                 logger.error('错误')
 
     def reply_text(self, FromUserName, ToUserName, CreateTime, Content):
@@ -141,6 +157,14 @@ class WxSignatureHandler(tornado.web.RequestHandler):
         sha1 = hashlib.sha1(s.encode('utf-8')).hexdigest()
         logger.debug('sha1=' + sha1 + '&signature=' + signature)
         return sha1 == signature
-
-    def check_contain_order_id(self, content):
-        
+    
+    def on_response(self, response):
+        logger.info(response.body)
+        if response.error:
+            content = "对不起，输入的订单编号有误"
+        else:
+            content = "OK"
+        CreateTime = int(time.time())
+        out = self.reply_text(self._from_name,self._to_name,CreateTime,content)
+        self.write(out)
+        self.finish()
