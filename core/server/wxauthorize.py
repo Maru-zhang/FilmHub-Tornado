@@ -9,11 +9,12 @@ from PIL import Image,ImageDraw,ImageFont
 import time
 import re
 from core.cache.tokencache import TokenCache
+from core.cache.wxmediacache import WxMediaCache
 import json
 from tornado.httputil import url_concat
 import requests
 import os
-import requests
+from PIL import Image,ImageDraw,ImageFont
 
 class WxAuthorServer(object):
     """
@@ -74,6 +75,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
     sys_order_reply = "欢迎你关注娱乐圈"
     pattern = re.compile(r'^\d{15}$')
     _token_cache = TokenCache()
+    _media_cache = WxMediaCache()
 
     def data_received(self, chunk):
         pass
@@ -179,7 +181,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
             res_json = json.loads(response.body)
             name = res_json["result"]["buyer_info"]["name"]
             logger.info("name is" + name)
-            exit_media_id = self._token_cache.get_cache("image_" + self._order_id)
+            exit_media_id = self._media_cache.get_cache(self._order_id)
             if exit_media_id:
                 out = self.reply_image(self._from_name, self._to_name, CreateTime, exit_media_id)
                 self.write(out)
@@ -189,14 +191,18 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 token = self._token_cache.get_cache(self._token_cache.KEY_ACCESS_TOKEN)
                 playload_image = {'access_token': token,'type': 'image'}
                 logger.info("access_token is", token)
-                data = {'media': open(path + "/core/static/demo.jpeg", 'rb')}
-                r = requests.post(url='http://file.api.weixin.qq.com/cgi-bin/media/upload',params=playload_image,files=data)
+                ttfont = ImageFont.truetype('Arial.ttf', 36)
+                im = Image.open(path + "/core/static/demo.jpeg")  
+                draw = ImageDraw.Draw(im)  
+                draw.text((100,10),name, fill=(0,0,0),font=ttfont)
+                r = requests.post(url='http://file.api.weixin.qq.com/cgi-bin/media/upload',params=playload_image,files=im)
                 image_json = json.loads(r.text)
                 media_id = image_json["media_id"]
+                im.save(path + "/core/product/" + media_id + 'jpeg')
                 # save media_id for this order id
+                self._media_cache.set_cache(media_id, self._order_id)
                 print(media_id)
                 out = self.reply_image(self._from_name, self._to_name, CreateTime, media_id)
-                #out = self.reply_text(self._from_name,self._to_name,CreateTime,content)
                 self.write(out)
                 logger.info(r.text)
         self.finish()
