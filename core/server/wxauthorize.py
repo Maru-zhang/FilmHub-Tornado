@@ -191,7 +191,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 token = self._token_cache.get_cache(self._token_cache.KEY_ACCESS_TOKEN)
                 playload_image = {'access_token': token,'type': 'image'}
                 logger.info("access_token is", token)
-                ttfont = ImageFont.truetype('Arial.ttf', 36)
+                ttfont = ImageFont.truetype(path + '/core/static/Times New Roman.ttf', 36)
                 im = Image.open(path + "/core/static/demo.jpeg")  
                 draw = ImageDraw.Draw(im)  
                 draw.text((100,10),name, fill=(0,0,0),font=ttfont)
