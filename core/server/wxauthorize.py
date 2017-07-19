@@ -193,6 +193,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 r = requests.post(url='http://file.api.weixin.qq.com/cgi-bin/media/upload',params=playload_image,files=data)
                 image_json = json.loads(r.text)
                 media_id = image_json["media_id"]
+                # save media_id for this order id
                 print(media_id)
                 out = self.reply_image(self._from_name, self._to_name, CreateTime, media_id)
                 #out = self.reply_text(self._from_name,self._to_name,CreateTime,content)
