@@ -195,7 +195,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 im = Image.open(path + "/core/static/demo.jpeg")  
                 draw = ImageDraw.Draw(im)  
                 draw.text((100,10),name, fill=(0,0,0),font=ttfont)
-                newPath = path + "/core/product/" + self._order_id + 'jpeg'
+                newPath = path + "/core/product/" + self._order_id + '.jpeg'
                 im.save(newPath)
                 data = {'media': open(newPath, 'rb')}
                 r = requests.post(url='http://file.api.weixin.qq.com/cgi-bin/media/upload',params=playload_image,files=data)
