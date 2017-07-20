@@ -103,6 +103,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
         data = ET.fromstring(body)
         ToUserName = data.find('ToUserName').text
         FromUserName = data.find('FromUserName').text
+        logger.info('当前的发送订单的人为' + self._from_name)
         self._from_name = FromUserName
         self._to_name = ToUserName
         MsgType = data.find('MsgType').text
@@ -179,6 +180,10 @@ class WxSignatureHandler(tornado.web.RequestHandler):
             content = "OK"
             CreateTime = int(time.time())
             res_json = json.loads(response.body)
+            if res_json["result"]["status_code"] == 0:
+                out = self.reply_text(self._from_name, self._to_name, CreateTime, "对不起，您输入的订单是无效订单")
+                self.write(out)
+                return
             name = res_json["result"]["buyer_info"]["name"]
             logger.info("name is" + name)
             exit_media_id = self._media_cache.get_cache(self._order_id)
