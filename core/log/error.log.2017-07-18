@@ -1,0 +1,84 @@
+[2017-07-17 19:16:53]: runtime-log ERROR 110 错误
+[2017-07-17 19:16:57]: runtime-log ERROR 110 错误
+[2017-07-17 19:16:59]: runtime-log ERROR 110 错误
+[2017-07-17 19:17:03]: runtime-log ERROR 110 错误
+[2017-07-17 19:17:41]: runtime-log ERROR 123 错误
+[2017-07-17 19:20:10]: runtime-log ERROR 110 错误
+[2017-07-17 19:23:31]: runtime-log ERROR 110 name 'time' is not defined
+[2017-07-17 19:23:35]: runtime-log ERROR 110 name 'time' is not defined
+[2017-07-17 19:23:38]: runtime-log ERROR 110 name 'time' is not defined
+[2017-07-17 19:25:19]: runtime-log ERROR 84 微信sign校验,---ExceptionHTTP 400: Bad Request (Missing argument signature)
+[2017-07-17 19:25:41]: runtime-log ERROR 124 错误
+[2017-07-17 20:43:36]: runtime-log ERROR 115 name 'pattern' is not defined
+[2017-07-17 20:43:40]: runtime-log ERROR 115 name 'pattern' is not defined
+[2017-07-17 20:43:45]: runtime-log ERROR 115 name 'pattern' is not defined
+[2017-07-17 20:55:03]: runtime-log ERROR 117 name 'pattern' is not defined
+[2017-07-17 20:55:08]: runtime-log ERROR 117 name 'pattern' is not defined
+[2017-07-17 20:55:13]: runtime-log ERROR 117 name 'pattern' is not defined
+[2017-07-17 20:55:18]: runtime-log ERROR 117 name 'pattern' is not defined
+[2017-07-17 20:56:13]: runtime-log ERROR 117 name 'pattern' is not defined
+[2017-07-17 20:56:21]: runtime-log ERROR 117 name 'pattern' is not defined
+[2017-07-17 20:56:54]: runtime-log ERROR 117 '>' not supported between instances of 'builtin_function_or_method' and 'int'
+[2017-07-17 20:56:58]: runtime-log ERROR 117 '>' not supported between instances of 'builtin_function_or_method' and 'int'
+[2017-07-18 01:15:36]: runtime-log ERROR 119 '>' not supported between instances of 'builtin_function_or_method' and 'int'
+[2017-07-18 01:20:07]: runtime-log ERROR 113 local variable 'reply_content' referenced before assignment
+[2017-07-18 01:20:24]: runtime-log ERROR 113 local variable 'reply_content' referenced before assignment
+[2017-07-18 01:20:43]: runtime-log ERROR 113 local variable 'reply_content' referenced before assignment
+[2017-07-18 01:22:08]: runtime-log ERROR 113 local variable 'reply_content' referenced before assignment
+[2017-07-18 01:22:14]: runtime-log ERROR 113 local variable 'reply_content' referenced before assignment
+[2017-07-18 01:42:55]: runtime-log ERROR 116 local variable 'reply_content' referenced before assignment
+[2017-07-18 01:43:00]: runtime-log ERROR 116 local variable 'reply_content' referenced before assignment
+[2017-07-18 01:43:05]: runtime-log ERROR 116 local variable 'reply_content' referenced before assignment
+[2017-07-18 10:27:38]: runtime-log ERROR 128 'WxSignatureHandler' object has no attribute '_token_cache'
+[2017-07-18 10:27:43]: runtime-log ERROR 128 'WxSignatureHandler' object has no attribute '_token_cache'
+[2017-07-18 10:27:48]: runtime-log ERROR 128 'WxSignatureHandler' object has no attribute '_token_cache'
+[2017-07-18 10:30:15]: runtime-log ERROR 127 Expected bytes, unicode, or None; got <class 'dict'>
+[2017-07-18 10:30:20]: runtime-log ERROR 127 Expected bytes, unicode, or None; got <class 'dict'>
+[2017-07-18 10:30:25]: runtime-log ERROR 127 Expected bytes, unicode, or None; got <class 'dict'>
+[2017-07-18 10:35:33]: runtime-log ERROR 128 name 'json' is not defined
+[2017-07-18 10:35:38]: runtime-log ERROR 128 name 'json' is not defined
+[2017-07-18 10:35:43]: runtime-log ERROR 128 name 'json' is not defined
+[2017-07-18 10:36:28]: runtime-log ERROR 129 local variable 'reply_content' referenced before assignment
+[2017-07-18 10:36:33]: runtime-log ERROR 129 local variable 'reply_content' referenced before assignment
+[2017-07-18 10:36:38]: runtime-log ERROR 129 local variable 'reply_content' referenced before assignment
+[2017-07-18 10:47:15]: runtime-log ERROR 162 [微店请求]: Body must be None for method GET (unless allow_nonstandard_methods is true)
+[2017-07-18 10:56:41]: runtime-log ERROR 168 b'\r\n<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta content="yes" name="apple-mobile-web-app-capable"/>\n    <meta content="yes" name="apple-touch-fullscreen"/>\n    <meta content="telephone=no" name="format-detection"/>\n    <meta content="black" name="apple-mobile-web-app-status-bar-style">\n    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />\n    <link rel="dns-prefetch" href="//vap.gw.weidian.com">\n    <link rel="dns-prefetch" href="//assets.geilicdn.com">\n    <link rel="dns-prefetch" href="//analysis.koudai.com">\n    <link rel="dns-prefetch" href="https://si.geilicdn.com">\n    <link rel="shortcut icon" href="https://si.geilicdn.com/196cbc9c3bc08c5f4aadcc26f9950c8d.png" />\n    <title>\xe9\x94\x99\xe8\xaf\xaf\xe9\xa1\xb5</title>\n        <link rel="stylesheet" type="text/css" href="//assets.geilicdn.com/m/weidian-buyer/pkg/pages/error/index.html_aio_7683983.css" />\n    <!--\n        @require components/lib/index.less\n    -->\n</head>\n<body>\n\n</body>\n<!--\n    @require index.less\n-->\n<script data-loader src="//assets.geilicdn.com/m/weidian-buyer/components/lib/mod_ae116c3.js"></script>\n\n<script data-framework src="//assets.geilicdn.com/m/weidian-buyer/components/lib/index_1c73ed0.js"></script>\n<script type="text/javascript" src="//assets.geilicdn.com/m/weidian-buyer/pkg/pages/error/index.html_aio_e05e95d.js"></script>\n<script type="text/javascript">\n    require("pages/error/index");\n</script>\n</html>'
+[2017-07-18 10:59:43]: runtime-log ERROR 120 微店请求https://api.vdian.com/api?{"param": {"order_id": "9999999999999999"}, "public": {"access_token": "0c6e9cbaea99850e777b6e2ef2def57a0007451073", "version": "1.0", "format": "json", "method": "vdian.order.get"}}
+[2017-07-18 10:59:43]: runtime-log ERROR 169 b'\r\n<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta content="yes" name="apple-mobile-web-app-capable"/>\n    <meta content="yes" name="apple-touch-fullscreen"/>\n    <meta content="telephone=no" name="format-detection"/>\n    <meta content="black" name="apple-mobile-web-app-status-bar-style">\n    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />\n    <link rel="dns-prefetch" href="//vap.gw.weidian.com">\n    <link rel="dns-prefetch" href="//assets.geilicdn.com">\n    <link rel="dns-prefetch" href="//analysis.koudai.com">\n    <link rel="dns-prefetch" href="https://si.geilicdn.com">\n    <link rel="shortcut icon" href="https://si.geilicdn.com/196cbc9c3bc08c5f4aadcc26f9950c8d.png" />\n    <title>\xe9\x94\x99\xe8\xaf\xaf\xe9\xa1\xb5</title>\n        <link rel="stylesheet" type="text/css" href="//assets.geilicdn.com/m/weidian-buyer/pkg/pages/error/index.html_aio_7683983.css" />\n    <!--\n        @require components/lib/index.less\n    -->\n</head>\n<body>\n\n</body>\n<!--\n    @require index.less\n-->\n<script data-loader src="//assets.geilicdn.com/m/weidian-buyer/components/lib/mod_ae116c3.js"></script>\n\n<script data-framework src="//assets.geilicdn.com/m/weidian-buyer/components/lib/index_1c73ed0.js"></script>\n<script type="text/javascript" src="//assets.geilicdn.com/m/weidian-buyer/pkg/pages/error/index.html_aio_e05e95d.js"></script>\n<script type="text/javascript">\n    require("pages/error/index");\n</script>\n</html>'
+[2017-07-18 11:07:12]: runtime-log ERROR 120 微店请求https://api.vdian.com/api?param=%7B%27order_id%27%3A+%279999999999999999%27%7D&public=%7B%27access_token%27%3A+%277df48e3c5a6264b5bd26595ae29d00260007451073%27%2C+%27version%27%3A+%271.0%27%2C+%27format%27%3A+%27json%27%2C+%27method%27%3A+%27vdian.order.get%27%7D
+[2017-07-18 11:07:12]: runtime-log ERROR 169 b'\n{"status":{"status_code":10007,"status_reason":"\xe5\x8f\x82\xe6\x95\xb0\xe9\x94\x99\xe8\xaf\xaf\xef\xbc\x8c\xe8\xaf\xb7\xe5\x8f\x82\xe8\x80\x83API\xe6\x96\x87\xe6\xa1\xa3(\xe5\x8f\x82\xe6\x95\xb0:`access_token`\xe4\xb8\x8d\xe8\x83\xbd\xe4\xb8\xba\xe7\xa9\xba) "}}'
+[2017-07-18 12:38:33]: runtime-log ERROR 120 微店请求https://api.vdian.com/api?param=%7B%27order_id%27%3A+%27800053347920917%27%7D&public=%7B%27access_token%27%3A+%2703b2a7e06d8b7a2263d77f0ba98d3cdf0007451073%27%2C+%27version%27%3A+%271.0%27%2C+%27format%27%3A+%27json%27%2C+%27method%27%3A+%27vdian.order.get%27%7D
+[2017-07-18 12:38:33]: runtime-log ERROR 169 b'\n{"status":{"status_code":10007,"status_reason":"\xe5\x8f\x82\xe6\x95\xb0\xe9\x94\x99\xe8\xaf\xaf\xef\xbc\x8c\xe8\xaf\xb7\xe5\x8f\x82\xe8\x80\x83API\xe6\x96\x87\xe6\xa1\xa3(\xe5\x8f\x82\xe6\x95\xb0:`access_token`\xe4\xb8\x8d\xe8\x83\xbd\xe4\xb8\xba\xe7\xa9\xba) "}}'
+[2017-07-18 12:41:32]: runtime-log ERROR 120 微店请求https://api.vdian.com/api?param=%7B%27order_id%27%3A+%27800053347920917%27%7D&public=%7B%27access_token%27%3A+%27c1db017dad9757b5acff98f1c85516df0007451073%27%2C+%27version%27%3A+%271.0%27%2C+%27format%27%3A+%27json%27%2C+%27method%27%3A+%27vdian.order.get%27%7D
+[2017-07-18 12:41:32]: runtime-log ERROR 169 b'\n{"status":{"status_code":10007,"status_reason":"\xe5\x8f\x82\xe6\x95\xb0\xe9\x94\x99\xe8\xaf\xaf\xef\xbc\x8c\xe8\xaf\xb7\xe5\x8f\x82\xe8\x80\x83API\xe6\x96\x87\xe6\xa1\xa3(\xe5\x8f\x82\xe6\x95\xb0:`access_token`\xe4\xb8\x8d\xe8\x83\xbd\xe4\xb8\xba\xe7\xa9\xba) "}}'
+[2017-07-18 13:01:05]: runtime-log ERROR 120 微店请求https://api.vdian.com/api?param=%7B%27order_id%27%3A+%27800053347920917%27%7D&public=%7B%27access_token%27%3A+%274167d08d36bf3585e7ae69bd626351be0007451073%27%2C+%27version%27%3A+%271.0%27%2C+%27format%27%3A+%27json%27%2C+%27method%27%3A+%27vdian.order.get%27%7D
+[2017-07-18 13:01:05]: runtime-log ERROR 173 b'\n{"status":{"status_code":10007,"status_reason":"\xe5\x8f\x82\xe6\x95\xb0\xe9\x94\x99\xe8\xaf\xaf\xef\xbc\x8c\xe8\xaf\xb7\xe5\x8f\x82\xe8\x80\x83API\xe6\x96\x87\xe6\xa1\xa3(\xe5\x8f\x82\xe6\x95\xb0:`access_token`\xe4\xb8\x8d\xe8\x83\xbd\xe4\xb8\xba\xe7\xa9\xba) "}}'
+[2017-07-18 13:01:21]: runtime-log ERROR 131 local variable 'reply_content' referenced before assignment
+[2017-07-18 13:01:23]: runtime-log ERROR 120 微店请求https://api.vdian.com/api?param=%7B%27order_id%27%3A+%27800053347920917%27%7D&public=%7B%27access_token%27%3A+%274167d08d36bf3585e7ae69bd626351be0007451073%27%2C+%27version%27%3A+%271.0%27%2C+%27format%27%3A+%27json%27%2C+%27method%27%3A+%27vdian.order.get%27%7D
+[2017-07-18 13:01:24]: runtime-log ERROR 173 b'\n{"status":{"status_code":10007,"status_reason":"\xe5\x8f\x82\xe6\x95\xb0\xe9\x94\x99\xe8\xaf\xaf\xef\xbc\x8c\xe8\xaf\xb7\xe5\x8f\x82\xe8\x80\x83API\xe6\x96\x87\xe6\xa1\xa3(\xe5\x8f\x82\xe6\x95\xb0:`access_token`\xe4\xb8\x8d\xe8\x83\xbd\xe4\xb8\xba\xe7\xa9\xba) "}}'
+[2017-07-18 13:01:26]: runtime-log ERROR 131 local variable 'reply_content' referenced before assignment
+[2017-07-18 13:01:31]: runtime-log ERROR 131 local variable 'reply_content' referenced before assignment
+[2017-07-18 13:02:04]: runtime-log ERROR 120 微店请求https://api.vdian.com/api?param=%7B%27order_id%27%3A+%27800053347920917%27%7D&public=%7B%27access_token%27%3A+%2799ff6f52bfd79195467846f13f175b770007451073%27%2C+%27version%27%3A+%271.0%27%2C+%27format%27%3A+%27json%27%2C+%27method%27%3A+%27vdian.order.get%27%7D
+[2017-07-18 13:02:05]: runtime-log ERROR 173 b'\n{"status":{"status_code":10007,"status_reason":"\xe5\x8f\x82\xe6\x95\xb0\xe9\x94\x99\xe8\xaf\xaf\xef\xbc\x8c\xe8\xaf\xb7\xe5\x8f\x82\xe8\x80\x83API\xe6\x96\x87\xe6\xa1\xa3(\xe5\x8f\x82\xe6\x95\xb0:`access_token`\xe4\xb8\x8d\xe8\x83\xbd\xe4\xb8\xba\xe7\xa9\xba) "}}'
+[2017-07-18 14:14:08]: runtime-log ERROR 120 微店请求https://api.vdian.com/api?param=%7B%27order_id%27%3A+%27800053347920917%27%7D&public=%7B%27access_token%27%3A+%27368240ce2591fb81c5c3f25faca7282a0007451073%27%2C+%27version%27%3A+%271.0%27%2C+%27format%27%3A+%27json%27%2C+%27method%27%3A+%27vdian.order.get%27%7D
+[2017-07-18 14:14:08]: runtime-log ERROR 173 b'\n{"status":{"status_code":10007,"status_reason":"\xe5\x8f\x82\xe6\x95\xb0\xe9\x94\x99\xe8\xaf\xaf\xef\xbc\x8c\xe8\xaf\xb7\xe5\x8f\x82\xe8\x80\x83API\xe6\x96\x87\xe6\xa1\xa3(\xe5\x8f\x82\xe6\x95\xb0:`access_token`\xe4\xb8\x8d\xe8\x83\xbd\xe4\xb8\xba\xe7\xa9\xba) "}}'
+[2017-07-18 14:15:25]: runtime-log ERROR 120 微店请求https://api.vdian.com/api?param=%7B%27order_id%27%3A+%27800053347920917%27%7D&public=%7B%27access_token%27%3A+%27bdafd3096c4a38a57e49c9d589079d640007451073%27%2C+%27version%27%3A+%271.0%27%2C+%27format%27%3A+%27json%27%2C+%27method%27%3A+%27vdian.order.get%27%7D
+[2017-07-18 14:24:42]: runtime-log ERROR 120 微店请求https://api.vdian.com/api?param=%7B%27order_id%27%3A+%27800077569401886%27%7D&public=%7B%27access_token%27%3A+%273a36ea333ba141383e8cd15ac673c0130007451073%27%2C+%27version%27%3A+%271.0%27%2C+%27format%27%3A+%27json%27%2C+%27method%27%3A+%27vdian.order.get%27%7D
+[2017-07-18 14:29:29]: runtime-log ERROR 121 微店请求https://api.vdian.com/api?param={"order_id":"800077569401886"}&public={"method":"vdian.order.get","access_token":"346f2b3582454b8e86ff8df540867edf0007451073","version":"1.0","format":"json"}
+[2017-07-18 14:29:29]: runtime-log ERROR 172 None
+[2017-07-18 14:30:52]: runtime-log ERROR 121 微店请求https://api.vdian.com/api?param={"order_id":"800077569401886"}&public={"method":"vdian.order.get","access_token":"100b1cc7b54c8516b171cf51342272170007451073","version":"1.0","format":"json"}
+[2017-07-18 14:30:53]: runtime-log ERROR 172 None
+[2017-07-18 14:34:27]: runtime-log ERROR 121 微店请求https://api.vdian.com/api?param={"order_id":"800077620503582"}&public={"method":"vdian.order.get","access_token":"100b1cc7b54c8516b171cf51342272170007451073","version":"1.0","format":"json"}
+[2017-07-18 14:34:27]: runtime-log ERROR 172 None
+[2017-07-18 14:37:12]: runtime-log ERROR 121 微店请求https://api.vdian.com/api?param={"order_id":"800077620503582"}&public={"method":"vdian.order.get","access_token":"95b048bf3e6c9225b135647c51a7a47c0007451073","version":"1.0","format":"json"}
+[2017-07-18 14:37:15]: runtime-log ERROR 121 微店请求https://api.vdian.com/api?param={"order_id":"800077620503582"}&public={"method":"vdian.order.get","access_token":"95b048bf3e6c9225b135647c51a7a47c0007451073","version":"1.0","format":"json"}
+[2017-07-18 14:37:24]: runtime-log ERROR 132 local variable 'reply_content' referenced before assignment
+[2017-07-18 14:37:29]: runtime-log ERROR 132 local variable 'reply_content' referenced before assignment
+[2017-07-18 14:37:34]: runtime-log ERROR 132 local variable 'reply_content' referenced before assignment
+[2017-07-18 14:47:56]: runtime-log ERROR 121 微店请求https://api.vdian.com/api?param={"order_id":"800077620503582"}&public={"method":"vdian.order.get","access_token":"ea23abe01c49d10b7d5c5f82605ba0900007451073","version":"1.0","format":"json"}
+[2017-07-18 14:49:58]: runtime-log ERROR 121 微店请求https://api.vdian.com/api?param={"order_id":"800077620503582"}&public={"method":"vdian.order.get","access_token":"bc5eae98752da0b51e401c91478fd8750007451073","version":"1.0","format":"json"}
+[2017-07-18 14:54:28]: runtime-log ERROR 121 微店请求https://api.vdian.com/api?param={"order_id":"800077620503582"}&public={"method":"vdian.order.get","access_token":"f3f6387fa91be3e1d85b9fc5f28160ef0007451073","version":"1.0","format":"json"}
+[2017-07-18 15:08:39]: runtime-log ERROR 166 ========
+[2017-07-18 15:13:12]: runtime-log ERROR 167 ========
+[2017-07-18 15:14:36]: runtime-log ERROR 167 ========
+[2017-07-18 15:38:52]: runtime-log ERROR 134 name 'requests' is not defined
