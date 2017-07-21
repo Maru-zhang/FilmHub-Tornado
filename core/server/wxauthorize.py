@@ -182,19 +182,19 @@ class WxSignatureHandler(tornado.web.RequestHandler):
     def on_response(self, response):
         CreateTime = int(time.time())
         if response.error:
-            out = self.reply_image(self._fddrom_name,self._to_name,CreateTime, WxConfig.PART_IN_FAILURE_COPYWRITE)
+            out = self.reply_image(self._fddrom_name,self._to_name,CreateTime, WxConfig.HTTP_RESPONSE_ERROR_COPYWRITE)
             self.write(out)
             self.finish()
         else:
-            first_apply = self.reply_text(self._from_name, self._to_name, CreateTime, WxConfig.PART_IN_SUCCESS_COPYWRITE)
-            self.write(first_apply)
             CreateTime = int(time.time())
             res_json = json.loads(response.body)
             if res_json["status"]["status_code"] != 0:
-                out = self.reply_text(self._from_name, self._to_name, CreateTime, "对不起，您输入的订单是无效订单")
+                out = self.reply_text(self._from_name, self._to_name, CreateTime, WxConfig.PART_IN_FAILURE_COPYWRITE)
                 self.write(out)
                 self.finish()
                 return
+            first_apply = self.reply_text(self._from_name, self._to_name, CreateTime, WxConfig.PART_IN_SUCCESS_COPYWRITE)
+            self.write(first_apply)
             name = res_json["result"]["buyer_info"]["name"]
             exit_media_id = self._media_cache.get_cache(self._order_id)
             if exit_media_id is not None:
