@@ -187,6 +187,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
             self.finish()
         else:
             first_apply = self.reply_text(self._from_name, self._to_name, CreateTime, WxConfig.PART_IN_SUCCESS_COPYWRITE)
+            self.write(first_apply)
             CreateTime = int(time.time())
             res_json = json.loads(response.body)
             if res_json["status"]["status_code"] != 0:
