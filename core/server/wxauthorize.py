@@ -203,7 +203,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 self.write(out)
                 self.finish()
             else:
-                token = self._token_cache.get_cache(self._toke1n_cache.KEY_ACCESS_TOKEN)
+                token = self._token_cache.get_cache(self._token_cache.KEY_ACCESS_TOKEN)
                 playload_image = {'access_token': token,'type': 'image'}
                 ttfont = ImageFont.truetype(self.get_font_path(), 36)
                 im = Image.open(self.get_random_path())
@@ -217,7 +217,6 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 media_id = image_json["media_id"]
                 # save media_id for this order id
                 self._media_cache.set_cache(media_id, self._order_id)
-                print(media_id)
                 out = self.reply_image(self._from_name, self._to_name, CreateTime, media_id)
                 self.write(out)
         self.finish()
