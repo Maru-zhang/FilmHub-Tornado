@@ -15,9 +15,7 @@ class Application(tornado.web.Application):
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "core/template"),
             static_path=os.path.join(os.path.dirname(__file__), "core/static"),
-            debug=True,
-            login_url='/login',
-            # cookie_secret='MuG7xxacQdGPR7Svny1OfY6AymHPb0H/t02+I8rIHHE=',
+            debug=True
         )
         super(Application, self).__init__(urlpatterns, **settings)
 

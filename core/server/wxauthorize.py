@@ -196,7 +196,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 return
             name = res_json["result"]["buyer_info"]["name"]
             exit_media_id = self._media_cache.get_cache(self._order_id)
-            if exit_media_id:
+            if exit_media_id is not None:
                 out = self.reply_image(self._from_name, self._to_name, CreateTime, exit_media_id)
                 self.write(out)
                 self.finish()
