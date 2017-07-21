@@ -187,7 +187,6 @@ class WxSignatureHandler(tornado.web.RequestHandler):
             self.write(out)
             self.finish()
         else:
-            content = "OK"
             CreateTime = int(time.time())
             res_json = json.loads(response.body)
             if res_json["status"]["status_code"] != 0:
@@ -196,7 +195,6 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 self.finish()
                 return
             name = res_json["result"]["buyer_info"]["name"]
-            logger.info("name is" + name)
             exit_media_id = self._media_cache.get_cache(self._order_id)
             if exit_media_id:
                 out = self.reply_image(self._from_name, self._to_name, CreateTime, exit_media_id)
@@ -204,9 +202,11 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 self.finish()
             else:
                 token = self._token_cache.get_cache(self._token_cache.KEY_ACCESS_TOKEN)
+                rawImagePath = self.get_random_path()
                 playload_image = {'access_token': token,'type': 'image'}
+                logger.info("【新创建图片】" + rawImagePath)
                 ttfont = ImageFont.truetype(self.get_font_path(), 36)
-                im = Image.open(self.get_random_path())
+                im = Image.open(rawImagePath)
                 draw = ImageDraw.Draw(im)  
                 draw.text((100,10),name, fill=(0,0,0),font=ttfont)
                 newPath = self.workpath + "/core/product/" + self._order_id + '.jpeg'
@@ -215,7 +215,6 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 r = requests.post(url='http://file.api.weixin.qq.com/cgi-bin/media/upload',params=playload_image,files=data)
                 image_json = json.loads(r.text)
                 media_id = image_json["media_id"]
-                # save media_id for this order id
                 self._media_cache.set_cache(media_id, self._order_id)
                 out = self.reply_image(self._from_name, self._to_name, CreateTime, media_id)
                 self.write(out)
