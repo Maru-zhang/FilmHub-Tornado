@@ -199,7 +199,6 @@ class WxSignatureHandler(tornado.web.RequestHandler):
             if exit_media_id is not None:
                 out = self.reply_image(self._from_name, self._to_name, CreateTime, exit_media_id)
                 self.write(out)
-                self.finish()
             else:
                 token = self._token_cache.get_cache(self._token_cache.KEY_ACCESS_TOKEN)
                 rawImagePath = self.get_random_path()
