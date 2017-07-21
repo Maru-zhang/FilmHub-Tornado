@@ -2,6 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
+.out
+core/server/pro
 
 # C extensions
 *.so
@@ -20,7 +22,7 @@ lib64/
 parts/
 sdist/
 var/
-wheels/
+/
 *.egg-info/
 .installed.cfg
 *.egg

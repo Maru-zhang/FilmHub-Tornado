@@ -1,20 +1,21 @@
 # -*- coding: utf-8 -*-
-from core.logger_helper import logger
+import os
+import re
+import time
+import json
+import random
 import hashlib
+import requests
 import tornado.web
 import tornado.httpclient
-from core.server.wxconfig import WxConfig
 import xml.etree.ElementTree as ET
+from core.logger_helper import logger
 from PIL import Image,ImageDraw,ImageFont
-import time
-import re
+from tornado.httputil import url_concat
+from core.server.wxconfig import WxConfig
+from PIL import Image,ImageDraw,ImageFont
 from core.cache.tokencache import TokenCache
 from core.cache.wxmediacache import WxMediaCache
-import json
-from tornado.httputil import url_concat
-import requests
-import os
-from PIL import Image,ImageDraw,ImageFont
 
 class WxAuthorServer(object):
     """
@@ -76,6 +77,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
     pattern = re.compile(r'^\d{15}$')
     _token_cache = TokenCache()
     _media_cache = WxMediaCache()
+    workpath = os.getcwd()
 
     def data_received(self, chunk):
         pass
@@ -130,8 +132,8 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                         self.write(out)
                         self.finish()
             except Exception as e:
-                self.finish()
                 logger.error(str(e))
+                self.finish()
 
         elif MsgType == 'event':
             '''接收事件推送'''
@@ -144,9 +146,9 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                     out = self.reply_text(FromUserName, ToUserName, CreateTime, reply_content)
                     self.write(out)
                     self.finish()
-            except:
+            except Exception as e:
+                logger.error(str(e))
                 self.finish()
-                logger.error('错误')
 
     def reply_text(self, FromUserName, ToUserName, CreateTime, Content):
         textTpl = """<xml> <ToUserName><![CDATA[%s]]></ToUserName> <FromUserName><![CDATA[%s]]></FromUserName> <CreateTime>%s</CreateTime> <MsgType><![CDATA[%s]]></MsgType> <Content><![CDATA[%s]]></Content></xml>"""
@@ -160,13 +162,22 @@ class WxSignatureHandler(tornado.web.RequestHandler):
 
     def check_signature(self, signature, timestamp, nonce):
         """校验token是否正µ确"""
-        token = 'zhangbinhui'
+        token = WxConfig.AppCustomToken
         L = [timestamp, nonce, token]
         L.sort()
         s = L[0] + L[1] + L[2]
         sha1 = hashlib.sha1(s.encode('utf-8')).hexdigest()
         logger.debug('sha1=' + sha1 + '&signature=' + signature)
         return sha1 == signature
+
+    def get_font_path(self):
+        """获取字体的路径"""
+        return self.workpath + "/core/product/SourceHanSerifCN-Medium.otf"
+
+    def get_random_path(self):
+        """获取随机源图片本地路径"""
+        randomNumber = random.randint(0, 3)
+        return self.workpath + "/core/static/Puzzle_%d.jpeg" % randomNumber
     
     def on_response(self, response):
         CreateTime = int(time.time())
@@ -192,15 +203,13 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 self.write(out)
                 self.finish()
             else:
-                path = os.getcwd()
-                token = self._token_cache.get_cache(self._token_cache.KEY_ACCESS_TOKEN)
+                token = self._token_cache.get_cache(self._toke1n_cache.KEY_ACCESS_TOKEN)
                 playload_image = {'access_token': token,'type': 'image'}
-                logger.info("access_token is", token)
-                ttfont = ImageFont.truetype(path + '/core/product/SourceHanSerifCN-Medium.otf', 36)
-                im = Image.open(path + "/core/static/demo.jpeg")  
+                ttfont = ImageFont.truetype(self.get_font_path(), 36)
+                im = Image.open(self.get_random_path())
                 draw = ImageDraw.Draw(im)  
                 draw.text((100,10),name, fill=(0,0,0),font=ttfont)
-                newPath = path + "/core/product/" + self._order_id + '.jpeg'
+                newPath = self.workpath + "/core/product/" + self._order_id + '.jpeg'
                 im.save(newPath)
                 data = {'media': open(newPath, 'rb')}
                 r = requests.post(url='http://file.api.weixin.qq.com/cgi-bin/media/upload',params=playload_image,files=data)
@@ -211,5 +220,4 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 print(media_id)
                 out = self.reply_image(self._from_name, self._to_name, CreateTime, media_id)
                 self.write(out)
-                logger.info(r.text)
         self.finish()
