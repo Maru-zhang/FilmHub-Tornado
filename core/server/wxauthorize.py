@@ -182,11 +182,11 @@ class WxSignatureHandler(tornado.web.RequestHandler):
     def on_response(self, response):
         CreateTime = int(time.time())
         if response.error:
-            content = "对不起，输入的订单编号有误"
-            out = self.reply_image(self._fddrom_name,self._to_name,CreateTime, content)
+            out = self.reply_image(self._fddrom_name,self._to_name,CreateTime, WxConfig.PART_IN_FAILURE_COPYWRITE)
             self.write(out)
             self.finish()
         else:
+            first_apply = self.reply_text(self._from_name, self._to_name, CreateTime, WxConfig.PART_IN_SUCCESS_COPYWRITE)
             CreateTime = int(time.time())
             res_json = json.loads(response.body)
             if res_json["status"]["status_code"] != 0:

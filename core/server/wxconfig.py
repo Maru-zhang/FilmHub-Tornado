@@ -10,6 +10,9 @@ class WxConfig(object):
     """微信网页开发域名"""
     AppHost = 'http://maru-zhang.cn'
 
+    PART_IN_SUCCESS_COPYWRITE = "你已成功参与活动，下面是你专属的应援图。快去分享吧~，集齐4张不同的李易峰专属应援图可兑换李易峰签名海报1张。"
+    PART_IN_FAILURE_COPYWRITE = "请输入正确的订单号，李易峰专刊正热卖种，想了解活动详情/点击这里/。如有疑问请咨询小圈，电话/微信：xxxxxxx"
+    
     '''获取微信access_token'''
     config_get_access_token_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s' % (AppID, AppSecret)
     '''获取微店access_token'''
