@@ -10,6 +10,9 @@ class WxConfig(object):
     """微信网页开发域名"""
     AppHost = 'http://maru-zhang.cn'
 
+    ATTENTION_INIT_COPYWRITE_1 = "影视圈简介文案"
+    ATTENTION_INIT_COPYWRITE_2 = "影视圈为李易峰独家打造的专刊正火热销售中，/点击此处购买/。若已购买，直接回复订单号可获取李易峰专属应援图。集齐一套可以兑换奖品哦，/点击这里查看详情/。"
+    HTTP_RESPONSE_ERROR_COPYWRITE = "服务器响应失败，请稍后再试~"
     PART_IN_SUCCESS_COPYWRITE = "你已成功参与活动，下面是你专属的应援图。快去分享吧~，集齐4张不同的李易峰专属应援图可兑换李易峰签名海报1张。"
     PART_IN_FAILURE_COPYWRITE = "请输入正确的订单号，李易峰专刊正热卖种，想了解活动详情/点击这里/。如有疑问请咨询小圈，电话/微信：xxxxxxx"
     

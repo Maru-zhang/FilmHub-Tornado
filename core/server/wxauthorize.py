@@ -73,7 +73,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
 
     check_signature: 校验signature是否正确
     """
-    sys_order_reply = "欢迎你关注娱乐圈"
+
     pattern = re.compile(r'^\d{15}$')
     _token_cache = TokenCache()
     _media_cache = WxMediaCache()
@@ -142,9 +142,10 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 if Event == 'subscribe':
                     # 关注事件
                     CreateTime = int(time.time())
-                    reply_content = self.sys_order_reply
-                    out = self.reply_text(FromUserName, ToUserName, CreateTime, reply_content)
-                    self.write(out)
+                    out1 = self.reply_text(FromUserName, ToUserName, CreateTime, WxConfig.ATTENTION_INIT_COPYWRITE_1)
+                    out2 = self.reply_text(FromUserName, ToUserName, CreateTime, WxConfig.ATTENTION_INIT_COPYWRITE_2)
+                    self.write(out1)
+                    self.write(out2)
                     self.finish()
             except Exception as e:
                 logger.error(str(e))
