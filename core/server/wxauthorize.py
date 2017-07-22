@@ -183,10 +183,11 @@ class WxSignatureHandler(tornado.web.RequestHandler):
         """发送文字类型客服消息"""
         token = self._token_cache.get_cache(self._token_cache.KEY_ACCESS_TOKEN)
         url = WxConfig.server_message_send_url + token
-        data = {"touser": self._from_name,
+        headers = {'content-type': 'charset=utf8'}
+        dic = {"touser": self._from_name,
                 "msgtype": "text",
                 "text": {"content": message}}
-        return requests.post(url=url, json=data)
+        return requests.post(url=url, data=json.dumps(dic,ensure_ascii=False).encode('utf8'), headers=headers)
     
     def on_response(self, response):
         CreateTime = int(time.time())
