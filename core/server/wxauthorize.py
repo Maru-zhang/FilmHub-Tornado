@@ -202,8 +202,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 self.write(out)
                 self.finish()
                 return
-            first_apply = self.reply_text(self._from_name, self._to_name, CreateTime, WxConfig.PART_IN_SUCCESS_COPYWRITE)
-            self.send_service_message_text(first_apply)
+            self.send_service_message_text(WxConfig.PART_IN_SUCCESS_COPYWRITE)
             name = res_json["result"]["buyer_info"]["name"]
             exit_media_id = self._media_cache.get_cache(self._order_id)
             if exit_media_id is not None:
