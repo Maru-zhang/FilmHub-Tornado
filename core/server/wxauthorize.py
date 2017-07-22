@@ -186,7 +186,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
         data = {"touser": self._from_name,
                 "msgtype": "text",
                 "text": {"content": message}}
-        return requests.post(url=url, params=data)
+        return requests.post(url=url, json=data)
     
     def on_response(self, response):
         CreateTime = int(time.time())
