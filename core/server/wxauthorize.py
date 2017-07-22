@@ -143,10 +143,9 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                     # 关注事件
                     CreateTime = int(time.time())
                     out1 = self.reply_text(FromUserName, ToUserName, CreateTime, WxConfig.ATTENTION_INIT_COPYWRITE_1)
-                    out2 = self.reply_text(FromUserName, ToUserName, CreateTime, WxConfig.ATTENTION_INIT_COPYWRITE_2)
-                    self.write(out1)
-                    self.write(out2)
+                    self.write(out)
                     self.finish()
+                    self.send_service_message_text(WxConfig.ATTENTION_INIT_COPYWRITE_2)
             except Exception as e:
                 logger.error(str(e))
                 self.finish()
@@ -179,6 +178,15 @@ class WxSignatureHandler(tornado.web.RequestHandler):
         """获取随机源图片本地路径"""
         randomNumber = random.randint(0, 3)
         return self.workpath + "/core/static/Puzzle_%d.jpeg" % randomNumber
+
+    def send_service_message_text(self, message):
+        """发送文字类型客服消息"""
+        token = self._token_cache.get_cache(self._token_cache.KEY_WD_ACCESS_TOKEN)
+        url = WxConfig.server_message_send_url + token
+        data = {"touser": self._from_name,
+                "msgtype": "text",
+                "text": {"content": message}}
+        return requests.post(url=url, params=data)
     
     def on_response(self, response):
         CreateTime = int(time.time())
@@ -195,7 +203,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 self.finish()
                 return
             first_apply = self.reply_text(self._from_name, self._to_name, CreateTime, WxConfig.PART_IN_SUCCESS_COPYWRITE)
-            self.write(first_apply)
+            self.send_service_message_text(first_apply)
             name = res_json["result"]["buyer_info"]["name"]
             exit_media_id = self._media_cache.get_cache(self._order_id)
             if exit_media_id is not None:

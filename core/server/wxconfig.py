@@ -22,12 +22,12 @@ class WxConfig(object):
     config_wd_get_access_token_url = 'https://oauth.open.weidian.com/token?grant_type=client_credential&appkey=%s&secret=%s' % (WdAppID, WdAppSecret)
     '''自定义菜单创建接口'''
     menu_create_url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='
-
     '''自定义菜单查询接口'''
     menu_get_url = 'https://api.weixin.qq.com/cgi-bin/menu/get?access_token='
-
     '''自定义菜单删除接口'''
     menu_delete_url = 'https://api.weixin.qq.com/cgi-bin/menu/delete?access_token='
+    '''客服发送消息接口'''
+    server_message_send_url = 'https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token='
 
     '''微信公众号菜单映射数据'''
     """重定向后会带上state参数，开发者可以填写a-zA-Z0-9的参数值，最多128字节"""
