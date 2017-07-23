@@ -114,10 +114,10 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 MsgId = data.find("MsgId").text
                 if MsgType == 'text':
                     Content = data.find('Content').text  # 文本消息内容
-                    results = self.pattern.findall(Content)
-                    if len(results) > 0:
+                    results = self.pattern.search(Content)
+                    if results:
                         # 找到了符合订单ID的内容
-                        order_id = results[0]
+                        order_id = results.group()
                         self._order_id = order_id
                         http_client = tornado.httpclient.AsyncHTTPClient()
                         token = self._token_cache.get_cache(self._token_cache.KEY_WD_ACCESS_TOKEN)
