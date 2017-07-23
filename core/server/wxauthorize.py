@@ -219,7 +219,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 im = Image.open(rawImagePath)
                 draw = ImageDraw.Draw(im)  
                 draw.text((340,363),name, fill=(0,0,0),font=namefont)
-                draw.text((490,980),name, fill=(165,165,165),font=idFont)
+                draw.text((490,980),self._order_id, fill=(165,165,165),font=idFont)
                 newPath = self.workpath + "/core/product/" + self._order_id + '.jpeg'
                 im.save(newPath)
                 data = {'media': open(newPath, 'rb')}
