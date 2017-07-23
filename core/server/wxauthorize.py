@@ -74,7 +74,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
     check_signature: 校验signature是否正确
     """
 
-    pattern = re.compile(r'^\d{15}$')
+    pattern = re.compile(r'\d{15}')
     _token_cache = TokenCache()
     _media_cache = WxMediaCache()
     workpath = os.getcwd()
