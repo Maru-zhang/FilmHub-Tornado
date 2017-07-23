@@ -214,10 +214,12 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 rawImagePath = self.get_random_path()
                 playload_image = {'access_token': token,'type': 'image'}
                 logger.info("【新创建图片】" + rawImagePath)
-                ttfont = ImageFont.truetype(self.get_font_path(), 36)
+                namefont = ImageFont.truetype(self.get_font_path(), 20)
+                idFont = ImageFont.truetype(self.get_font_path(), 12)
                 im = Image.open(rawImagePath)
                 draw = ImageDraw.Draw(im)  
-                draw.text((100,10),name, fill=(0,0,0),font=ttfont)
+                draw.text((340,363),name, fill=(0,0,0),font=namefont)
+                draw.text((490,980),name, fill=(165,165,165),font=idFont)
                 newPath = self.workpath + "/core/product/" + self._order_id + '.jpeg'
                 im.save(newPath)
                 data = {'media': open(newPath, 'rb')}
