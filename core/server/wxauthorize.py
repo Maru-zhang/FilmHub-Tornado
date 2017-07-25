@@ -144,7 +144,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 if Event == 'subscribe':
                     # 关注事件
                     CreateTime = int(time.time())
-                    out1 = self.reply_text(FromUserName, ToUserName, CreateTime, WxConfig.ATTENTION_INIT_COPYWRITE_1)
+                    out = self.reply_text(FromUserName, ToUserName, CreateTime, WxConfig.ATTENTION_INIT_COPYWRITE_1)
                     self.write(out)
                     self.finish()
                     self.send_service_message_text(WxConfig.ATTENTION_INIT_COPYWRITE_2)
