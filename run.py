@@ -7,7 +7,7 @@ from core.url import urlpatterns
 from core.server.wxschedule import WxSchedule
 from core.server.wxmenu import WxMenuServer
 
-define('port', default=80, help='run on the given port', type=int)
+define('port', default=8001, help='run on the given port', type=int)
 
 class Application(tornado.web.Application):
     
