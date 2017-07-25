@@ -10,18 +10,15 @@ class WxConfig(object):
     """微信网页开发域名"""
     AppHost = 'http://maru-zhang.cn'
 
-    COMMON_COPYWRITE = '''
-    Hey,
+    COMMON_COPYWRITE = '''Hey,
     1.看往期精彩内容请点击菜单栏
     2.请输入正确的订单号，获取分享图
     3.订单号无法有效使用，请联系淘宝/微店客服
     '''
-    ATTENTION_INIT_COPYWRITE_1 = u'''
-    《影视圈》杂志创刊于1994年，
+    ATTENTION_INIT_COPYWRITE_1 = u'''《影视圈》杂志创刊于1994年，
     欢迎2017年关注！
     ~♥~'''
-    ATTENTION_INIT_COPYWRITE_2 = u'''
-    如果你是🐝
+    ATTENTION_INIT_COPYWRITE_2 = u'''如果你是🐝
     请输入暗号（订单号），
     自动生成惊喜。
 

@@ -6,6 +6,5 @@ import tornado.web
 '''web解析规则'''
 
 urlpatterns = [
-    (r'/wxsignature', WxSignatureHandler),
-    (r'/home', HomePageHandler)
+    (r'/wxsignature', WxSignatureHandler)
    ]
