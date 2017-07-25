@@ -17,6 +17,8 @@ from PIL import Image,ImageDraw,ImageFont
 from core.cache.tokencache import TokenCache
 from core.cache.wxmediacache import WxMediaCache
 
+code_mapping = {}
+
 class WxAuthorServer(object):
     """
     微信网页授权server
@@ -126,7 +128,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                         url = r'https://api.vdian.com/api?param={"order_id":"%s"}&public={"method":"vdian.order.get","access_token":"%s","version":"1.0","format":"json"}' % (order_id,token)
                         http_client.fetch(url, callback=self.on_response)
                     else:
-                        reply_content = "对不起，你可以再说一遍么?"
+                        reply_content = WxConfig.COMMON_COPYWRITE
                         CreateTime = int(time.time())
                         out = self.reply_text(FromUserName, ToUserName, CreateTime, reply_content)
                         self.write(out)
@@ -176,8 +178,16 @@ class WxSignatureHandler(tornado.web.RequestHandler):
 
     def get_random_path(self):
         """获取随机源图片本地路径"""
-        randomNumber = random.randint(0, 3)
-        return self.workpath + "/core/static/Puzzle_%d.jpeg" % randomNumber
+        randomNumber = random.randint(1, 100)
+        if randomNumber <= 35:
+            peakNumber = 0
+        elif randomNumber <= 70:
+            peakNumber = 1
+        elif randomNumber <= 85:
+            peakNumber = 2
+        else:
+            peakNumber = 3
+        return self.workpath + "/core/static/Puzzle_%d.jpeg" % peakNumber
 
     def send_service_message_text(self, message):
         """发送文字类型客服消息"""

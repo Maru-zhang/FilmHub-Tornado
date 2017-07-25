@@ -4,17 +4,35 @@ class WxConfig(object):
     """
     AppID = 'wxa78dfd0e461d4211'  # AppID(应用ID)
     AppSecret = '594e2e6f4de7fd19bd9ca1030aee5f10'  # AppSecret(应用密钥)
-    AppCustomToken = 'zhangbinhui'
+    AppCustomToken = 'circlemagazine'
     WdAppID = '683523' # 微店应用ID
     WdAppSecret = '083a282e921b0f9775d5e0222d3fc3e7' # 微店应用秘钥
     """微信网页开发域名"""
     AppHost = 'http://maru-zhang.cn'
 
-    ATTENTION_INIT_COPYWRITE_1 = u"影视圈简介文案"
-    ATTENTION_INIT_COPYWRITE_2 = u"影视圈为李易峰独家打造的专刊正火热销售中，/点击此处购买/。若已购买，直接回复订单号可获取李易峰专属应援图。集齐一套可以兑换奖品哦，/点击这里查看详情/。"
+    COMMON_COPYWRITE = '''
+    Hey,
+    1.看往期精彩内容请点击菜单栏
+    2.请输入正确的订单号，获取分享图
+    3.订单号无法有效使用，请联系淘宝/微店客服
+    '''
+    ATTENTION_INIT_COPYWRITE_1 = u'''
+    《影视圈》杂志创刊于1994年，
+    欢迎2017年关注！
+    ~♥~'''
+    ATTENTION_INIT_COPYWRITE_2 = u'''
+    如果你是🐝
+    请输入暗号（订单号），
+    自动生成惊喜。
+
+    获取暗号→请请点击↓菜单栏“李易峰专刊”
+    下单后输入暗号（订单号），
+    生成不同款惊喜。'''
     HTTP_RESPONSE_ERROR_COPYWRITE = u"服务器响应失败，请稍后再试~"
-    PART_IN_SUCCESS_COPYWRITE = u'你已成功参与活动，下面是你专属的应援图。快去分享吧~，集齐4张不同的李易峰专属应援图可兑换李易峰签名海报1张。'
-    PART_IN_FAILURE_COPYWRITE = u'请输入正确的订单号，李易峰专刊正热卖种，想了解活动详情/点击这里/。如有疑问请咨询小圈，电话/微信：xxxxxxx'
+    PART_IN_SUCCESS_COPYWRITE = u'''订单号验证成功，
+    恭喜你获得专属分享图，
+    快晒一下吧~'''
+    PART_IN_FAILURE_COPYWRITE = COMMON_COPYWRITE
     
     '''获取微信access_token'''
     config_get_access_token_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s' % (AppID, AppSecret)
