@@ -98,9 +98,9 @@ class WxMenuServer(object):
                 "name": "联系我们",
                 "sub_button": [
                     {
-                        "type": "click",
+                        "type": "media_id",
                         "name": "加入我们",
-                        "key": "employment"
+                        "media_id": "b-Ij3Ifb-J_iT6cv09d5mOV7UvvCeEZ9fQqxIEqAXW0"
                     },
                     {
                         "type": "click",
@@ -108,9 +108,9 @@ class WxMenuServer(object):
                         "key": "reprint"
                     },
                     {
-                        "type": "click",
+                        "type": "media_id",
                         "name": "商务合作",
-                        "key": "cooperation"
+                        "media_id": "b-Ij3Ifb-J_iT6cv09d5mKHcKOLuXzDAqMAT9ns8XWU"
                     }
                 ]
             }

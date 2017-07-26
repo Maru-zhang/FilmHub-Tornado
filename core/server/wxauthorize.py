@@ -151,14 +151,6 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                         # 转载
                         out = self.reply_text(FromUserName, ToUserName, CreateTime, WxConfig.REPRINT_COPYWRITE)
                         self.write(out)
-                    elif key == 'cooperation':
-                        # 商务合作
-                        out = self.reply_image(FromUserName, ToUserName, CreateTime, 'NwbDkKZjh6y6NAbiHYDwOZH9DXNvvrwLw-8LYlZjtViAsivLEaukv3aGHPjuDAKz')
-                        self.write(out)
-                    elif key == 'employment':
-                        # 招聘
-                        out = self.reply_image(FromUserName, ToUserName, CreateTime, 'jQrJ3xhTzJTbpNc1Y-XQgkNYt4TZKRxgN97-rVv1ROxF8B71VLVGUm7g-iS33idL')
-                        self.write(out)
             except Exception as e:
                 logger.error(str(e))
             finally:
