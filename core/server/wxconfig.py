@@ -2,8 +2,8 @@ class WxConfig(object):
     """
     微信开发--基础配置
     """
-    AppID = 'wxa78dfd0e461d4211'  # AppID(应用ID)
-    AppSecret = '594e2e6f4de7fd19bd9ca1030aee5f10'  # AppSecret(应用密钥)
+    AppID = 'wx9f03bb78e4bf9577'  # AppID(应用ID)
+    AppSecret = '2b6dd0f7a3c0084908469dbdf060f8bd'  # AppSecret(应用密钥)
     AppCustomToken = 'circlemagazine'
     WdAppID = '683523' # 微店应用ID
     WdAppSecret = '083a282e921b0f9775d5e0222d3fc3e7' # 微店应用秘钥
@@ -24,6 +24,9 @@ class WxConfig(object):
 获取暗号→请请点击↓菜单栏“李易峰专刊”
 下单后输入暗号（订单号），
 生成不同款惊喜。'''
+    REPRINT_COPYWRITE = u'''欢迎转载
+转载请添加微信415716805
+并请将你想要转载的文章以及你的公众号id发送给我们，我们会第一时间为你开通白名单。'''
     HTTP_RESPONSE_ERROR_COPYWRITE = u"服务器响应失败，请稍后再试~"
     PART_IN_SUCCESS_COPYWRITE = u'''订单号验证成功，
 恭喜你获得专属分享图，

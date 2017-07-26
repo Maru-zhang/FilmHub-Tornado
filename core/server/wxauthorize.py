@@ -17,8 +17,6 @@ from PIL import Image,ImageDraw,ImageFont
 from core.cache.tokencache import TokenCache
 from core.cache.wxmediacache import WxMediaCache
 
-code_mapping = {}
-
 class WxAuthorServer(object):
     """
     微信网页授权server
@@ -140,14 +138,24 @@ class WxSignatureHandler(tornado.web.RequestHandler):
         elif MsgType == 'event':
             '''接收事件推送'''
             try:
+                CreateTime = int(time.time())
                 Event = data.find('Event').text
                 if Event == 'subscribe':
                     # 关注事件
-                    CreateTime = int(time.time())
                     out = self.reply_text(FromUserName, ToUserName, CreateTime, WxConfig.ATTENTION_INIT_COPYWRITE_1)
                     self.write(out)
-                    self.finish()
                     self.send_service_message_text(WxConfig.ATTENTION_INIT_COPYWRITE_2)
+                elif Event == 'CLICK':
+                    key = data.find('EventKey').text
+                    if key == 'report':
+                        # 转载
+                        out = self.reply_text(FromUserName, ToUserName, CreateTime, WxConfig.REPRINT_COPYWRITE)
+                        self.write(out)
+                    elif key == 'cooperation'
+                        # 商务合作
+                    elif key == 'employment'
+                        # 招聘
+                self.finish()
             except Exception as e:
                 logger.error(str(e))
                 self.finish()
