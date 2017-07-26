@@ -2,8 +2,8 @@ class WxConfig(object):
     """
     微信开发--基础配置
     """
-    AppID = 'wx9f03bb78e4bf9577'  # AppID(应用ID)
-    AppSecret = '2b6dd0f7a3c0084908469dbdf060f8bd'  # AppSecret(应用密钥)
+    AppID = 'wxa78dfd0e461d4211'  # AppID(应用ID)
+    AppSecret = '594e2e6f4de7fd19bd9ca1030aee5f10'  # AppSecret(应用密钥)
     AppCustomToken = 'circlemagazine'
     WdAppID = '683523' # 微店应用ID
     WdAppSecret = '083a282e921b0f9775d5e0222d3fc3e7' # 微店应用秘钥
