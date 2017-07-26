@@ -208,7 +208,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
         else:
             CreateTime = int(time.time())
             res_json = json.loads(response.body)
-            if res_json["status"]["status_code"] != 0:
+            if res_json["status"]["status_code"] != 0 or res_json["result"]["status"] == "unpay":
                 out = self.reply_text(self._from_name, self._to_name, CreateTime, WxConfig.PART_IN_FAILURE_COPYWRITE)
                 self.write(out)
                 self.finish()
