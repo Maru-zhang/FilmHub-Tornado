@@ -212,43 +212,46 @@ class WxSignatureHandler(tornado.web.RequestHandler):
         return requests.post(url=url, data=json.dumps(dic,ensure_ascii=False).encode('utf8'), headers=headers)
     
     def on_response(self, response):
-        CreateTime = int(time.time())
-        if response.error:
-            out = self.reply_text(self._fddrom_name,self._to_name,CreateTime, WxConfig.HTTP_RESPONSE_ERROR_COPYWRITE)
-            self.write(out)
-            self.finish()
-        else:
+        try:
             CreateTime = int(time.time())
-            res_json = json.loads(response.body)
-            if res_json["status"]["status_code"] != 0 or res_json["result"]["status"] == "unpay":
-                out = self.reply_text(self._from_name, self._to_name, CreateTime, WxConfig.PART_IN_FAILURE_COPYWRITE)
-                self.write(out)
-                self.finish()
-                return
-            self.send_service_message_text(WxConfig.PART_IN_SUCCESS_COPYWRITE)
-            name = res_json["result"]["buyer_info"]["name"]
-            exit_media_id = self._media_cache.get_cache(self._order_id)
-            if exit_media_id is not None:
-                out = self.reply_image(self._from_name, self._to_name, CreateTime, exit_media_id)
+            if response.error:
+                out = self.reply_text(self._fddrom_name,self._to_name,CreateTime, WxConfig.HTTP_RESPONSE_ERROR_COPYWRITE)
                 self.write(out)
             else:
-                token = self._token_cache.get_cache(self._token_cache.KEY_ACCESS_TOKEN)
-                rawImagePath = self.get_random_path()
-                playload_image = {'access_token': token,'type': 'image'}
-                logger.info("【新创建图片】" + rawImagePath)
-                namefont = ImageFont.truetype(self.get_font_path(), 20)
-                idFont = ImageFont.truetype(self.get_font_path(), 12)
-                im = Image.open(rawImagePath)
-                draw = ImageDraw.Draw(im)  
-                draw.text((340,363), name[0:9], fill=(0,0,0),font=namefont)
-                draw.text((490,980), self._order_id, fill=(165,165,165),font=idFont)
-                newPath = self.workpath + "/core/product/" + self._order_id + '.jpeg'
-                im.save(newPath)
-                data = {'media': open(newPath, 'rb')}
-                r = requests.post(url='http://file.api.weixin.qq.com/cgi-bin/media/upload',params=playload_image,files=data)
-                image_json = json.loads(r.text)
-                media_id = image_json["media_id"]
-                self._media_cache.set_cache(self._order_id, media_id)
-                out = self.reply_image(self._from_name, self._to_name, CreateTime, media_id)
-                self.write(out)
-        self.finish()
+                CreateTime = int(time.time())
+                res_json = json.loads(response.body)
+                if res_json["status"]["status_code"] != 0 or res_json["result"]["status"] == "unpay":
+                    out = self.reply_text(self._from_name, self._to_name, CreateTime, WxConfig.PART_IN_FAILURE_COPYWRITE)
+                    self.write(out)
+                    self.finish()
+                    return
+                self.send_service_message_text(WxConfig.PART_IN_SUCCESS_COPYWRITE)
+                name = res_json["result"]["buyer_info"]["name"]
+                exit_media_id = self._media_cache.get_cache(self._order_id)
+                if exit_media_id is not None:
+                    out = self.reply_image(self._from_name, self._to_name, CreateTime, exit_media_id)
+                    self.write(out)
+                else:
+                    token = self._token_cache.get_cache(self._token_cache.KEY_ACCESS_TOKEN)
+                    rawImagePath = self.get_random_path()
+                    playload_image = {'access_token': token,'type': 'image'}
+                    logger.info("【新创建图片】" + rawImagePath)
+                    namefont = ImageFont.truetype(self.get_font_path(), 20)
+                    idFont = ImageFont.truetype(self.get_font_path(), 12)
+                    im = Image.open(rawImagePath)
+                    draw = ImageDraw.Draw(im)  
+                    draw.text((340,363), name[0:9], fill=(0,0,0),font=namefont)
+                    draw.text((490,980), self._order_id, fill=(165,165,165),font=idFont)
+                    newPath = self.workpath + "/core/product/" + self._order_id + '.jpeg'
+                    im.save(newPath)
+                    data = {'media': open(newPath, 'rb')}
+                    r = requests.post(url='http://file.api.weixin.qq.com/cgi-bin/media/upload',params=playload_image,files=data)
+                    image_json = json.loads(r.text)
+                    media_id = image_json["media_id"]
+                    self._media_cache.set_cache(self._order_id, media_id)
+                    out = self.reply_image(self._from_name, self._to_name, CreateTime, media_id)
+                    self.write(out)
+        except Exception as e:
+            logger.error(str(e))
+        finally:
+            self.finish()
