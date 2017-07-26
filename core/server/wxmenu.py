@@ -73,23 +73,57 @@ class WxMenuServer(object):
 
     def create_menu_data(self):
         """创建菜单数据"""
-        menu_data = {'button': []}  # 大菜单
-        menu_Index0 = {
-            'type': 'view',
-            'name': '测试菜单1',
-            'url': self._wx_author_server.get_code_url('menuIndex0')
-        }
-        menu_data['button'].append(menu_Index0)
+        menu_data = {'button': [
+            {
+                'name': '精选内容',
+                'sub_button': [
+                    {
+                        'type': 'view',
+                        'name': '精选文章',
+                        'url': u'http://mp.weixin.qq.com/mp/homepage?__biz=MjM5Nzc5MDkwMQ==&hid=3&sn=70ce35abda6a8236f90a3a36e964dc2d'
+                    },
+                    {
+                        'type': 'view',
+                        'name': '影评剧评',
+                        'url': u'http://mp.weixin.qq.com/mp/homepage?__biz=MjM5Nzc5MDkwMQ==&hid=4&sn=aeaee3a48324880d0c5e6ea335d5b9cc'
+                    },
+                    {
+                        'type': 'view',
+                        'name': '明星专访',
+                        'url': u'http://mp.weixin.qq.com/mp/homepage?__biz=MjM5Nzc5MDkwMQ==&hid=5&sn=24c252b77d42b6d93bd021bbc4eaf67f'
+                    }
+                ]
+            },
+            {
+                'name': '联系我们',
+                'sub_button': [
+                    {
+                        'type': 'click',
+                        'name': '加入我们',
+                        'key': 'employment'
+                    },
+                    {
+                        'type': 'click',
+                        'name': '欢迎转载',
+                        'key': 'reprint'
+                    },
+                    {
+                        'type': 'click',
+                        'name': '商务合作',
+                        'key': 'cooperation'
+                    }
+                ]
+            }
+            ]}
         MENU_DATA = json.dumps(menu_data, ensure_ascii=False)
         logger.debug('【微信自定义菜单】创建菜单数据MENU_DATA[' + str(MENU_DATA) + ']')
         return MENU_DATA
 
 if __name__ == '__main__':
-    print("hahaha")
     wx_menu_server = WxMenuServer()
     '''创建菜单数据'''
     wx_menu_server.create_menu_data()
-    # '''自定义菜单创建接口'''
+    '''自定义菜单创建接口'''
     wx_menu_server.create_menu()
     '''自定义菜单查询接口'''
     # wx_menu_server.get_menu()

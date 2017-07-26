@@ -147,17 +147,21 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                     self.send_service_message_text(WxConfig.ATTENTION_INIT_COPYWRITE_2)
                 elif Event == 'CLICK':
                     key = data.find('EventKey').text
-                    if key == 'report':
+                    if key == 'reprint':
                         # 转载
                         out = self.reply_text(FromUserName, ToUserName, CreateTime, WxConfig.REPRINT_COPYWRITE)
                         self.write(out)
-                    elif key == 'cooperation'
+                    elif key == 'cooperation':
                         # 商务合作
-                    elif key == 'employment'
+                        out = self.reply_image(FromUserName, ToUserName, CreateTime, '')
+                        self.write(out)
+                    elif key == 'employment':
                         # 招聘
-                self.finish()
+                        out = self.reply_image(FromUserName, ToUserName, CreateTime, '')
+                        self.write(out)
             except Exception as e:
                 logger.error(str(e))
+            finally:
                 self.finish()
 
     def reply_text(self, FromUserName, ToUserName, CreateTime, Content):
@@ -210,7 +214,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
     def on_response(self, response):
         CreateTime = int(time.time())
         if response.error:
-            out = self.reply_image(self._fddrom_name,self._to_name,CreateTime, WxConfig.HTTP_RESPONSE_ERROR_COPYWRITE)
+            out = self.reply_text(self._fddrom_name,self._to_name,CreateTime, WxConfig.HTTP_RESPONSE_ERROR_COPYWRITE)
             self.write(out)
             self.finish()
         else:
