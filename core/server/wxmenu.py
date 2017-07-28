@@ -95,6 +95,11 @@ class WxMenuServer(object):
                 ]
             },
             {
+                "type": "view",
+                "name": "李易峰专刊",
+                "url": "https://weidian.com/s/209793342?ifr=shopdetail&wfr=c"
+            },
+            {
                 "name": "联系我们",
                 "sub_button": [
                     {
