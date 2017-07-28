@@ -7,5 +7,5 @@ import tornado.web
 
 urlpatterns = [
     (r'/wxsignature', WxSignatureHandler),
-    (r'/wxsignature', WdHandler)
+    (r'/wdsignature', WdHandler)
    ]
