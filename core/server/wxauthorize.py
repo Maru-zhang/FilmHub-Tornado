@@ -215,7 +215,8 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 if res_json["status"]["status_code"] != 0 or res_json["result"]["status"] == "unpay":
                     out = self.reply_text(self._from_name, self._to_name, CreateTime, WxConfig.PART_IN_FAILURE_COPYWRITE)
                     self.write(out)
-                    self.finish()
+                    logger.info("==========非法订单以及请求==========")
+                    logger.info(res_json)
                     return
                 self.send_service_message_text(WxConfig.PART_IN_SUCCESS_COPYWRITE)
                 name = res_json["result"]["buyer_info"]["name"]
