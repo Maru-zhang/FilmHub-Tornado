@@ -9,10 +9,12 @@ class WxMediaCache(BaseCache):
     set_cache               添加redis
     get_cache               获取redis
     """
+    _expire_media_token = 3 * 24 * 3600
 
     def set_cache(self, key, value):
         """添加微信Media相关redis"""
         res = self.redis_ctl.set(key, value)
+        self.redis_ctl.expire(key, self._expire_media_token)
         logger.debug('【微信media缓存】setCache>>>key[' + key + '],value[' + value + ']')
         return res
 
