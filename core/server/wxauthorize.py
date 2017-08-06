@@ -107,6 +107,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 self.finish()
         elif MsgType == 'image':
             try:
+                CreateTime = int(time.time())
                 out = self.reply_text(FromUserName, ToUserName, CreateTime, WxConfig.PART_IN_GUESSGANME_WAITTING)
                 self.write(out)
             except Exception as e:
