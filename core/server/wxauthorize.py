@@ -10,62 +10,12 @@ import tornado.web
 import tornado.httpclient
 import xml.etree.ElementTree as ET
 from core.logger_helper import logger
-from PIL import Image,ImageDraw,ImageFont
+from PIL import Image, ImageDraw, ImageFont
 from tornado.httputil import url_concat
 from core.server.wxconfig import WxConfig
 from PIL import Image,ImageDraw,ImageFont
 from core.cache.tokencache import TokenCache
 from core.cache.wxmediacache import WxMediaCache
-
-class WxAuthorServer(object):
-    """
-    微信网页授权server
-
-    get_code_url                            获取code的url
-    get_auth_access_token                   通过code换取网页授权access_token
-    refresh_token                           刷新access_token
-    check_auth                              检验授权凭证（access_token）是否有效
-    get_userinfo                            拉取用户信息
-    """
-
-    """授权后重定向的回调链接地址，请使用urlencode对链接进行处理"""
-    REDIRECT_URI = '%s/wx/wxauthor' % WxConfig.AppHost
-
-    """
-    应用授权作用域
-    snsapi_base （不弹出授权页面，直接跳转，只能获取用户openid）
-    snsapi_userinfo （弹出授权页面，可通过openid拿到昵称、性别、所在地。并且，即使在未关注的情况下，只要用户授权，也能获取其信息）
-    """
-    SCOPE = 'snsapi_base'
-    # SCOPE = 'snsapi_userinfo'
-
-    """通过code换取网页授权access_token"""
-    get_access_token_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?'
-
-    """拉取用户信息"""
-    get_userinfo_url = 'https://api.weixin.qq.com/sns/userinfo?'
-
-    def get_code_url(self, state):
-        """获取code的url"""
-        dict = {'redirect_uri': self.REDIRECT_URI}
-        redirect_uri = urllib.parse.urlencode(dict)
-        author_get_code_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&%s&response_type=code&scope=%s&state=%s#wechat_redirect' % (WxConfig.AppID, redirect_uri, self.SCOPE, state)
-        logger.debug('【微信网页授权】获取网页授权的code的url>>>>' + author_get_code_url)
-        return author_get_code_url
-
-    def get_auth_access_token(self, code):
-        """通过code换取网页授权access_token"""
-        url = self.get_access_token_url + 'appid=%s&secret=%s&code=%s&grant_type=authorization_code' % (WxConfig.AppID, WxConfig.AppSecret, code)
-        r = requests.get(url)
-        logger.debug('【微信网页授权】通过code换取网页授权access_token的Response[' + str(r.status_code) + ']')
-        if r.status_code == 200:
-            res = r.text
-            logger.debug('【微信网页授权】通过code换取网页授权access_token>>>>' + res)
-            json_res = json.loads(res)
-            if 'access_token' in json_res.keys():
-                return json_res
-            elif 'errcode' in json_res.keys():
-                errcode = json_res['errcode']
 
 class WxSignatureHandler(tornado.web.RequestHandler):
     """
@@ -151,6 +101,14 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                         # 转载
                         out = self.reply_text(FromUserName, ToUserName, CreateTime, WxConfig.REPRINT_COPYWRITE)
                         self.write(out)
+            except Exception as e:
+                logger.error(str(e))
+            finally:
+                self.finish()
+        elif MsgType == 'image':
+            try:
+                out = self.reply_text(FromUserName, ToUserName, CreateTime, WxConfig.PART_IN_GUESSGANME_WAITTING)
+                self.write(out)
             except Exception as e:
                 logger.error(str(e))
             finally:

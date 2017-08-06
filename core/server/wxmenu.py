@@ -3,8 +3,6 @@ import json
 from core.server.wxconfig import WxConfig
 from core.cache.tokencache import TokenCache
 from core.logger_helper import logger
-from core.server.wxauthorize import WxAuthorServer
-
 
 class WxMenuServer(object):
     """
@@ -17,7 +15,6 @@ class WxMenuServer(object):
     """
 
     _token_cache = TokenCache()  # 微信token缓存
-    _wx_author_server = WxAuthorServer()  # 微信网页授权server
 
     def create_menu(self):
         """自定义菜单创建接口"""

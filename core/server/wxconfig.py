@@ -32,6 +32,7 @@ class WxConfig(object):
 恭喜你获得专属分享图，
 快晒一下吧~'''
     PART_IN_FAILURE_COPYWRITE = COMMON_COPYWRITE
+    PART_IN_GUESSGANME_WAITTING = u"快如闪电，机智如你，图片收到，正在验证准确率！"
     
     '''获取微信access_token'''
     config_get_access_token_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s' % (AppID, AppSecret)

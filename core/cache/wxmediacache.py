@@ -21,9 +21,9 @@ class WxMediaCache(BaseCache):
     def get_cache(self, key):
         """获取redis"""
         try:
-            v = (self.redis_ctl.get(key)).decode('utf-8')
-            logger.debug(v)
-            logger.debug('【微信Meida缓存】getCache>>>key[' + key + '],value[' + v + ']')
-            return v
+            media_id = (self.redis_ctl.get(key)).decode('utf-8')
+            logger.debug(media_id)
+            logger.debug('【微信Meida缓存】getCache>>>key[' + key + '],value[' + media_id + ']')
+            return media_id
         except Exception:
             return None
