@@ -3,8 +3,6 @@ import json
 from core.server.wxconfig import WxConfig
 from core.cache.tokencache import TokenCache
 from core.logger_helper import logger
-from core.server.wxauthorize import WxAuthorServer
-
 
 class WxMenuServer(object):
     """
@@ -17,7 +15,6 @@ class WxMenuServer(object):
     """
 
     _token_cache = TokenCache()  # 微信token缓存
-    _wx_author_server = WxAuthorServer()  # 微信网页授权server
 
     def create_menu(self):
         """自定义菜单创建接口"""
@@ -73,44 +70,49 @@ class WxMenuServer(object):
 
     def create_menu_data(self):
         """创建菜单数据"""
-        menu_data = {'button': [
+        menu_data = {"button": [
             {
-                'name': '精选内容',
-                'sub_button': [
+                "name": "精选内容",
+                "sub_button": [
                     {
-                        'type': 'view',
-                        'name': '精选文章',
-                        'url': u'http://mp.weixin.qq.com/mp/homepage?__biz=MjM5Nzc5MDkwMQ==&hid=3&sn=70ce35abda6a8236f90a3a36e964dc2d'
+                        "type": "view",
+                        "name": "精选文章",
+                        "url": "http://mp.weixin.qq.com/mp/homepage?__biz=MjM5Nzc5MDkwMQ==&hid=3&sn=70ce35abda6a8236f90a3a36e964dc2d"
                     },
                     {
-                        'type': 'view',
-                        'name': '影评剧评',
-                        'url': u'http://mp.weixin.qq.com/mp/homepage?__biz=MjM5Nzc5MDkwMQ==&hid=4&sn=aeaee3a48324880d0c5e6ea335d5b9cc'
+                        "type": "view",
+                        "name": "影评剧评",
+                        "url": "http://mp.weixin.qq.com/mp/homepage?__biz=MjM5Nzc5MDkwMQ==&hid=4&sn=aeaee3a48324880d0c5e6ea335d5b9cc"
                     },
                     {
-                        'type': 'view',
-                        'name': '明星专访',
-                        'url': u'http://mp.weixin.qq.com/mp/homepage?__biz=MjM5Nzc5MDkwMQ==&hid=5&sn=24c252b77d42b6d93bd021bbc4eaf67f'
+                        "type": "view",
+                        "name": "明星专访",
+                        "url": "http://mp.weixin.qq.com/mp/homepage?__biz=MjM5Nzc5MDkwMQ==&hid=5&sn=24c252b77d42b6d93bd021bbc4eaf67f"
                     }
                 ]
             },
             {
-                'name': '联系我们',
-                'sub_button': [
+                "type": "view",
+                "name": "李易峰专刊",
+                "url": "https://weidian.com/s/209793342?ifr=shopdetail&wfr=c"
+            },
+            {
+                "name": "联系我们",
+                "sub_button": [
                     {
-                        'type': 'click',
-                        'name': '加入我们',
-                        'key': 'employment'
+                        "type": "media_id",
+                        "name": "加入我们",
+                        "media_id": "b-Ij3Ifb-J_iT6cv09d5mOV7UvvCeEZ9fQqxIEqAXW0"
                     },
                     {
-                        'type': 'click',
-                        'name': '欢迎转载',
-                        'key': 'reprint'
+                        "type": "click",
+                        "name": "欢迎转载",
+                        "key": "reprint"
                     },
                     {
-                        'type': 'click',
-                        'name': '商务合作',
-                        'key': 'cooperation'
+                        "type": "media_id",
+                        "name": "商务合作",
+                        "media_id": "b-Ij3Ifb-J_iT6cv09d5mKHcKOLuXzDAqMAT9ns8XWU"
                     }
                 ]
             }

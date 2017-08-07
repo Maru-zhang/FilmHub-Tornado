@@ -1,10 +1,11 @@
 from core.server.wxauthorize import WxSignatureHandler
-from core.server.test import HomePageHandler
+from core.server.wd_handler import WdHandler
 import tornado.web
 
 
 '''web解析规则'''
 
 urlpatterns = [
-    (r'/wxsignature', WxSignatureHandler)
+    (r'/wxsignature', WxSignatureHandler),
+    (r'/wdsignature', WdHandler)
    ]
